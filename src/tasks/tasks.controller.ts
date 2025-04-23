@@ -18,8 +18,12 @@ export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   @Post()
-  async create(@Body('title') title: string, @Req() req) {
-    return this.tasksService.create(req.user.id, title);
+  async create(
+    @Body('title') title: string,
+    @Body('projectId') projectId: string,
+    @Req() req,
+  ) {
+    return this.tasksService.create(req.user.id, title, projectId);
   }
 
   @Get()

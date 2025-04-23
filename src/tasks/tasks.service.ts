@@ -6,11 +6,16 @@ import { Task } from '@prisma/client';
 export class TasksService {
   constructor(private prisma: PrismaService) {}
 
-  async create(userId: string, title: string): Promise<Task> {
+  async create(
+    userId: string,
+    title: string,
+    projectId?: string,
+  ): Promise<Task> {
     return this.prisma.task.create({
       data: {
         title,
         userId,
+        projectId,
       },
     });
   }
