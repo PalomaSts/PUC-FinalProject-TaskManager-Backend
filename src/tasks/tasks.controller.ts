@@ -27,8 +27,8 @@ export class TasksController {
   }
 
   @Get()
-  async findAll(@Req() req) {
-    return this.tasksService.findAll(req.user.id);
+  async findAll(@Req() req, @Body('projectId') projectId?: string) {
+    return this.tasksService.findAll(req.user.id, projectId);
   }
 
   @Get(':id')

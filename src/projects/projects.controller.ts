@@ -40,4 +40,9 @@ export class ProjectsController {
   async remove(@Param('id') id: string, @Req() req) {
     return this.projectsService.remove(req.user.id, id);
   }
+
+  @Get('with-tasks')
+  async findAllWithTasks(@Req() req) {
+    return this.projectsService.findAllWithTasks(req.user.id);
+  }
 }

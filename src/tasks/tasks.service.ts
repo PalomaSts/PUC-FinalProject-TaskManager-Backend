@@ -20,9 +20,9 @@ export class TasksService {
     });
   }
 
-  async findAll(userId: string): Promise<Task[]> {
+  async findAll(userId: string, projectId?: string): Promise<Task[]> {
     return this.prisma.task.findMany({
-      where: { userId },
+      where: { userId, ...(projectId && { projectId }) },
       orderBy: { createdAt: 'desc' },
     });
   }

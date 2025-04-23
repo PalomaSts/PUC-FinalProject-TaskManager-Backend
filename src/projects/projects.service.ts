@@ -34,4 +34,16 @@ export class ProjectsService {
       where: { id },
     });
   }
+
+  async findAllWithTasks(userId: string) {
+    return this.prisma.project.findMany({
+      where: { userId },
+      orderBy: { createdAt: 'desc' },
+      include: {
+        tasks: {
+          orderBy: { createdAt: 'desc' },
+        },
+      },
+    });
+  }
 }
