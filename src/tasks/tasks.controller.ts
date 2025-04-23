@@ -8,6 +8,7 @@ import {
   Patch,
   Req,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -44,5 +45,26 @@ export class TasksController {
   @Delete(':id')
   async remove(@Param('id') id: string, @Req() req) {
     return this.tasksService.remove(req.user.id, id);
+  }
+
+  @Patch(':id/assign-project/:projectId')
+  async assignProject(
+    @Param('id') taskId: string,
+    @Param('projectId') projectId: string,
+    @Req() req,
+  ) {
+    return this.tasksService.assignToProject(req.user.id, taskId, projectId);
+  }
+
+  @Get('/project/:projectId')
+  async findByProject(
+    @Param('projectId') projectId: string,
+    @Req() req,
+    @Query('done') done: string,
+  ) {
+    const doneFilter =
+      done === 'true' ? true : done === 'false' ? false : undefined;
+
+    return this.tasksService.findByProject(req.user.id, projectId, doneFilter);
   }
 }

@@ -50,4 +50,32 @@ export class TasksService {
       where: { id, userId },
     });
   }
+
+  async assignToProject(userId: string, taskId: string, projectId: string) {
+    return this.prisma.task.updateMany({
+      where: {
+        id: taskId,
+        userId,
+      },
+      data: {
+        projectId,
+      },
+    });
+  }
+
+  async findByProject(userId: string, projectId: string, done?: boolean) {
+    const where: any = {
+      userId,
+      projectId,
+    };
+
+    if (done !== undefined) {
+      where.done = done;
+    }
+
+    return this.prisma.task.findMany({
+      where,
+      orderBy: { createdAt: 'desc' },
+    });
+  }
 }
