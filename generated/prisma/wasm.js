@@ -124,11 +124,19 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password'
 };
 
+exports.Prisma.ProjectScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  userId: 'userId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.TaskScalarFieldEnum = {
   id: 'id',
   title: 'title',
   done: 'done',
   userId: 'userId',
+  projectId: 'projectId',
   createdAt: 'createdAt'
 };
 
@@ -142,9 +150,15 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Project: 'Project',
   Task: 'Task'
 };
 
